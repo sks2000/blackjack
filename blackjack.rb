@@ -56,6 +56,13 @@ dealer_hand.push(deck.pop)
 
 puts "You were dealt:"
 print_hand(player_hand)
+
+# if player is dealt blackjack, player immediately wins and program ends
+if hand_value(player_hand) == 21
+	puts "You were dealt a Blackjack! You win!"
+	exit	
+end
+
 puts "The dealer is showing a " + dealer_hand[0][0] + " of " + dealer_hand[0][1]
 puts
 
