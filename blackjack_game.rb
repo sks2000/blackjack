@@ -24,6 +24,8 @@ class Hand
 	end
 
 	# Calcualte the point value of the hand and assing to @hand_value
+	# Assume Ace = 11; if hand value is > 21 then reduce each Ace by 10 
+	# until hand value =< 21  
 	def calc_value
     	cardvalues = {"2"=>2,"3"=>3,"4"=>4,"5"=>5,"6"=>6,"7"=>7,"8"=>8,"9"=>9,"10"=>10,"J"=>10,"Q"=>10,"K"=>10,"A"=>11}
       	
@@ -106,10 +108,11 @@ class Player
 		end
 	end
 
+	# Display player hand to screen
 	def show_hand
 		puts "#{name} was dealt:"
 		hand.cards.each{|c| c.display_card}
-		print "Hand value: #{hand.hand_value.to_s}\n\n"
+		puts "Hand value: #{hand.hand_value.to_s}\n\n"
 	end
 end
 
@@ -126,7 +129,7 @@ class Dealer < Player
 		end
 	end
 
-	# Display the card Dealer is showing
+	# Display the card Dealer is showing (second card)
 	def show_facecard
 		puts "The #{name} is showing:" 
 		hand.cards[1].display_card
@@ -145,6 +148,7 @@ class BlackjackGame
 		puts "Welcome to the Blackjack Game.\n\n"
 	end
 
+	# Deal intial  cards to player and dealer
 	def deal_cards
 		@player.draw_card(@deck.deal_card)
 		@dealer.draw_card(@deck.deal_card)
@@ -156,6 +160,7 @@ class BlackjackGame
 	# If both dealer and player have blackjack, it's a push
 	# If only player has blackjack, player automatically wins
 	# If only dealer has blackjack, dealer immediately shows hand and wins
+	# Returns true if either player or dealer has blackjack
 	def blackjack_check
 		if @player.hand.hand_value == 21 && @dealer.hand.hand_value == 21
 		 	@dealer.show_hand
@@ -183,6 +188,7 @@ class BlackjackGame
 		end
 	end
 
+	# Start Game
 	def start
 		welcome_message
 		deal_cards
