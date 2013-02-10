@@ -10,7 +10,7 @@ class Test
 		x = 10
 	end
 
-	def f1
+	def f2
 		puts x
 		@x = 10
 	end
